@@ -1,5 +1,12 @@
 const body = document.querySelector("body")
 const bookList = document.querySelector(".bookList")
+const createBookButton = document.querySelector(".createNewBook")
+const dialog = document.querySelector(".dialog")
+const showDialogButton = document.querySelector(".createNewBookDialog");
+const cancelCreateBook = document.querySelector(".cancelNewBook");
+const formReset = document.querySelector(".formReset")
+
+
 
 const myLibrary = [];
 
@@ -41,3 +48,25 @@ function displayLibrary(){
         shell.appendChild(showRead);
     })
 };
+
+function createBook(event){
+    let title = document.getElementById("title").value;
+    let author = document.getElementById("author").value;
+    let pages = document.getElementById("pages").value;
+    let read = document.getElementById("read").value;
+    myLibrary.push(new Book(title, author, pages, read));
+    displayLibrary();
+    formReset.reset();
+    event.preventDefault();
+    dialog.close();
+}
+
+showDialogButton.addEventListener("click", () => {
+    dialog.showModal();
+});
+cancelCreateBook.addEventListener("click", () => {
+    dialog.close();
+});
+
+createBookButton.addEventListener("click", createBook)
+
