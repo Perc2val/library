@@ -65,6 +65,7 @@ showDialogButton.addEventListener("click", () => {
     dialog.showModal();
 });
 cancelCreateBook.addEventListener("click", () => {
+    formReset.reset();
     dialog.close();
 });
 
