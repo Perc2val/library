@@ -4,13 +4,14 @@ const createBookButton = document.querySelector(".createNewBook")
 const dialog = document.querySelector(".dialog")
 const showDialogButton = document.querySelector(".createNewBookDialog");
 const cancelCreateBook = document.querySelector(".cancelNewBook");
-const formReset = document.querySelector(".formReset")
+const formReset = document.querySelector(".formReset");
+const checkboxHTML = document.querySelector("#read");
 
 
 
 
 
-const myLibrary = [];
+let myLibrary = [];
 
 function Book(title, author, pages, read){
     if (!new.target){
@@ -46,12 +47,19 @@ function displayLibrary(){
         let showPages = document.createElement("p");
         showPages.textContent = `Pages: ${element.pages}`;
         shell.appendChild(showPages);
-        let showRead = document.createElement("p");
-        showRead.textContent = `Read: ${element.read}`;
+        let showRead = document.createElement("input");
+        showRead.type = "checkbox";
+        if(`${element.read}` == 1){
+            showRead.checked = true;
+        } else {
+            showRead.checked = false;
+        }
         shell.appendChild(showRead);
         let delButton = document.createElement("button");
         delButton.addEventListener("click", ()=> {
-            
+            let result = myLibrary.filter(function(el) { return el.id != element.id});
+            myLibrary = result;
+            displayLibrary();
         })
         delButton.classList.add("del")
         delButton.textContent = "Delete";
@@ -60,10 +68,11 @@ function displayLibrary(){
 };
 
 function createBook(event){
-    let title = document.getElementById("title").value;
-    let author = document.getElementById("author").value;
-    let pages = document.getElementById("pages").value;
-    let read = document.getElementById("read").value;
+    title = document.getElementById("title").value;
+    author = document.getElementById("author").value;
+    pages = document.getElementById("pages").value;
+    read = document.getElementById("read").value;
+    console.log(read)
     myLibrary.push(new Book(title, author, pages, read));
     displayLibrary();
     formReset.reset();
