@@ -8,6 +8,8 @@ const formReset = document.querySelector(".formReset")
 
 
 
+
+
 const myLibrary = [];
 
 function Book(title, author, pages, read){
@@ -32,6 +34,7 @@ function displayLibrary(){
     bookList.innerHTML = "";
     myLibrary.forEach(element => {
         let shell = document.createElement("div");
+        shell.dataset.id = element.id;
         bookList.appendChild(shell);
         shell.classList.add("shell")
         let heading = document.createElement("h3");
@@ -46,6 +49,13 @@ function displayLibrary(){
         let showRead = document.createElement("p");
         showRead.textContent = `Read: ${element.read}`;
         shell.appendChild(showRead);
+        let delButton = document.createElement("button");
+        delButton.addEventListener("click", ()=> {
+            
+        })
+        delButton.classList.add("del")
+        delButton.textContent = "Delete";
+        shell.appendChild(delButton);
     })
 };
 
@@ -60,6 +70,7 @@ function createBook(event){
     event.preventDefault();
     dialog.close();
 }
+
 
 showDialogButton.addEventListener("click", () => {
     dialog.showModal();
