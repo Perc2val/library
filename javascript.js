@@ -49,7 +49,7 @@ function displayLibrary(){
         shell.appendChild(showPages);
         let showRead = document.createElement("input");
         showRead.type = "checkbox";
-        if(`${element.read}` == 1){
+        if (element.read == "on"){
             showRead.checked = true;
         } else {
             showRead.checked = false;
@@ -71,8 +71,12 @@ function createBook(event){
     title = document.getElementById("title").value;
     author = document.getElementById("author").value;
     pages = document.getElementById("pages").value;
-    read = document.getElementById("read").value;
-    console.log(read)
+    read = document.getElementById("read");
+    if (read.checked){
+        read = "on"
+    } else {
+        read = "off"
+    }
     myLibrary.push(new Book(title, author, pages, read));
     displayLibrary();
     formReset.reset();
