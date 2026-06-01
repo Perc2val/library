@@ -14,8 +14,8 @@ body{
     border: solid 1px black;
     border-radius: 5px;
     box-shadow: 1px black;
-    width: 150px;
-    height: 250px;
+    width: 250px;
+    height: 400px;
 }
 .bookList{
     display: flex;

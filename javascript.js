@@ -22,13 +22,29 @@ function Book(title, author, pages, read){
     this.pages = pages;
     this.read = read;
     this.id = crypto.randomUUID();
+    Book.prototype.readStatus = function() {
+        if (this.read == "on"){
+            this.read = "off";
+            console.log(1)
+            console.log(myLibrary)
+        } else {
+            this.read = "on"
+            console.log(2)
+            console.log(myLibrary)
+        }
+    }
     this.info = function() {
         console.log(`${this.title} by ${this.author}, ${this.pages}, ${this.read}`)
     }
 };
 
-function addBookToLibrary(title, author, pages, read) {
-    myLibrary.push(new Book(title, author, pages, read));
+
+
+
+
+
+function addBookToLibrary(book) {
+    myLibrary.push(book);
 };
 
 function displayLibrary(){
@@ -47,14 +63,20 @@ function displayLibrary(){
         let showPages = document.createElement("p");
         showPages.textContent = `Pages: ${element.pages}`;
         shell.appendChild(showPages);
-        let showRead = document.createElement("input");
-        showRead.type = "checkbox";
+        let showRead = document.createElement("p");
         if (element.read == "on"){
-            showRead.checked = true;
+            showRead.textContent = "Read: You have read this book"
         } else {
-            showRead.checked = false;
+            showRead.textContent = "Read: You didnt read this book"
         }
         shell.appendChild(showRead);
+        let readButton = document.createElement("button");
+        readButton.textContent = "Read?";
+        readButton.addEventListener("click", () => {
+            element.readStatus()
+            displayLibrary()
+        });
+        shell.appendChild(readButton);
         let delButton = document.createElement("button");
         delButton.addEventListener("click", ()=> {
             let result = myLibrary.filter(function(el) { return el.id != element.id});
@@ -71,18 +93,22 @@ function createBook(event){
     title = document.getElementById("title").value;
     author = document.getElementById("author").value;
     pages = document.getElementById("pages").value;
-    read = document.getElementById("read");
-    if (read.checked){
+    test = document.getElementById("read");
+    if (test.checked){
         read = "on"
     } else {
         read = "off"
     }
-    myLibrary.push(new Book(title, author, pages, read));
+    let book = new Book(title, author, pages, read);
+    addBookToLibrary(book)
     displayLibrary();
     formReset.reset();
     event.preventDefault();
     dialog.close();
 }
+
+
+
 
 
 showDialogButton.addEventListener("click", () => {
