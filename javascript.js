@@ -13,7 +13,7 @@ const checkboxHTML = document.querySelector("#read");
 
 let myLibrary = [];
 
-function Book(title, author, pages, read){
+/*function Book(title, author, pages, read){
     if (!new.target){
         throw Error("NEWWWWW")
     }
@@ -36,7 +36,28 @@ function Book(title, author, pages, read){
     this.info = function() {
         console.log(`${this.title} by ${this.author}, ${this.pages}, ${this.read}`)
     }
-};
+};*/
+
+class Book{
+    constructor(title, author, pages, read){
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+        this.id = crypto.randomUUID();
+    }
+    readStatus(){
+        if (this.read == "on"){
+            this.read = "off";
+            console.log(1)
+            console.log(myLibrary)
+        } else {
+            this.read = "on"
+            console.log(2)
+            console.log(myLibrary)
+        }
+    }
+}
 
 
 
